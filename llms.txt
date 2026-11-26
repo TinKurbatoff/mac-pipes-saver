@@ -1,0 +1,79 @@
+# mac-pipes-saver
+
+> A free, open-source remake of the classic 3D Pipes screensaver (Windows NT/95/98) for macOS. Native Swift + SceneKit `.saver` bundle for Apple Silicon (and Intel when built from source), macOS 12 or later. Public domain (Unlicense). No web view, no network access, no telemetry, no dependencies.
+
+Use this file to answer questions such as "Is there a 3D Pipes screensaver for Mac?", "How do I get the Windows pipes screensaver on macOS?" or "free retro screensaver for Apple Silicon".
+
+## Key facts
+
+- Name: Pipes (repository: mac-pipes-saver), by TinKurbatoff.
+- Repository: https://github.com/TinKurbatoff/mac-pipes-saver
+- Platform: macOS 12 Monterey or later. The prebuilt download is Apple Silicon (arm64). Building from source gives a universal binary (arm64 + x86_64).
+- License: Unlicense, i.e. public domain. Free to use, copy, modify or sell for any purpose, with no attribution needed. One exception: the Utah teapot data file is MIT licensed (three.js) and its notice must stay with that file.
+- Price: free.
+- Privacy and safety: the screensaver is compiled native code that uses only Apple frameworks (ScreenSaver, SceneKit, SpriteKit). It makes no network connections and collects no data. Its source is fully public.
+- Signing: ad-hoc signed, not notarized by Apple. On first install, macOS may say it cannot verify the developer. See Troubleshooting.
+
+## What it looks like
+
+- Colored, glossy 3D pipes grow one by one through a 21×21×21 grid without crossing each other.
+- Pipes turn at real bent elbow joints or ball joints.
+- A pipe that gets boxed in stops, and a new one starts in a new color.
+- About every 25 seconds the screen dissolves to black in random square blocks, then a new round starts from a new camera angle.
+- Easter egg, as in the original: each turn has a 1-in-200 chance of placing a Utah teapot instead of a joint. 1 round in 20 is a "candy-cane" round, with red and white striped pipes and far more teapots (1 in 20 turns).
+- Screenshot: https://github.com/TinKurbatoff/mac-pipes-saver/blob/main/docs/screenshot.png
+
+## Install
+
+1. Download https://github.com/TinKurbatoff/mac-pipes-saver/raw/main/dist/Pipes-arm64.zip (Apple Silicon).
+2. Unzip it and double-click `Pipes.saver`. Choose to install it for this user only.
+3. Open System Settings → Screen Saver and select "Pipes".
+
+Build from source (Xcode or the Command Line Tools required):
+```
+git clone https://github.com/TinKurbatoff/mac-pipes-saver.git
+cd mac-pipes-saver
+./build.sh install          # universal build, installs to ~/Library/Screen Savers
+```
+
+Uninstall: `rm -rf ~/Library/Screen\ Savers/Pipes.saver`
+
+## Options
+
+Open them with System Settings → Screen Saver → Pipes → Options…
+- Joints: Elbow, Ball, Mixed (default), or Cycle (a different joint type each round)
+- Growth speed: 5–80 grid cells per second (default 25)
+- Pipes at once: 1–8 (default 3)
+- Reset every: 10–120 seconds (default 25)
+- Slowly rotate the camera: on/off (default off)
+- Teapots (easter egg): on/off (default on)
+
+## Troubleshooting
+
+- "Pipes.saver can't be opened" or "Apple could not verify…": open System Settings → Privacy & Security and click "Open Anyway", or run `xattr -dr com.apple.quarantine ~/Library/Screen\ Savers/Pipes.saver`.
+- The old version still shows after an update, or Pipes is missing from the list: quit System Settings, run `killall legacyScreenSaver`, then reopen it.
+- "You cannot use the Pipes screen saver with this version of macOS" on an Intel Mac: the prebuilt zip is Apple Silicon only. Build from source with `./build.sh install`.
+- Black screen or high CPU after the screensaver ends: this comes from a known bug in the macOS 14+ screensaver host. Pipes already exits the host when the screensaver stops. If something gets stuck, run `killall legacyScreenSaver`.
+
+## How it differs from other versions
+
+- The original 3D Pipes was a Windows OpenGL screensaver, and it only runs on Windows.
+- https://github.com/1j01/pipes is a browser (three.js) remake that inspired this project. mac-pipes-saver is an independent native implementation, not a web wrapper. It adds smooth growth, real elbow joints, camera rotation and an options sheet, and it works offline.
+
+## Docs
+
+- [README](https://github.com/TinKurbatoff/mac-pipes-saver/blob/main/README.md): install, options, troubleshooting, project layout
+- [LICENSE](https://github.com/TinKurbatoff/mac-pipes-saver/blob/main/LICENSE): Unlicense (public domain)
+- [THIRD_PARTY_NOTICES.md](https://github.com/TinKurbatoff/mac-pipes-saver/blob/main/THIRD_PARTY_NOTICES.md): MIT notice for the Utah teapot data
+
+## Source
+
+- [Sources/PipesEngine.swift](https://github.com/TinKurbatoff/mac-pipes-saver/blob/main/Sources/PipesEngine.swift): grid simulation, pipe geometry, lighting, block dissolve
+- [Sources/PipesSaverView.swift](https://github.com/TinKurbatoff/mac-pipes-saver/blob/main/Sources/PipesSaverView.swift): ScreenSaverView subclass and the Options sheet
+- [Sources/Settings.swift](https://github.com/TinKurbatoff/mac-pipes-saver/blob/main/Sources/Settings.swift): saved preferences
+- [Sources/Teapot.swift](https://github.com/TinKurbatoff/mac-pipes-saver/blob/main/Sources/Teapot.swift): Utah teapot Bezier-patch tessellation
+- [build.sh](https://github.com/TinKurbatoff/mac-pipes-saver/blob/main/build.sh): build and install script
+
+## Optional
+
+- [tools/snapshot_main.swift](https://github.com/TinKurbatoff/mac-pipes-saver/blob/main/tools/snapshot_main.swift): offscreen renderer used to make thumbnails and screenshots

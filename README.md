@@ -72,6 +72,7 @@ Sources/Settings.swift         saved preferences
 Sources/Teapot.swift           Utah teapot tessellation
 Sources/UtahTeapotData.swift   teapot control points
 tools/snapshot_main.swift      offscreen renderer (thumbnails, screenshots)
+llms.txt                       project summary for AI assistants
 ```
 
 ## License
