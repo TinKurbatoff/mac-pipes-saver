@@ -6,6 +6,8 @@ The classic 3D Pipes screensaver, rebuilt as a native macOS `.saver`. Pipes grow
 
 It's plain Swift + SceneKit, with no web view, no network access and no dependencies.
 
+**Open source and absolutely free.** It's released into the public domain under the [Unlicense](LICENSE). Use it, copy it, change it or sell it, for any purpose, with no attribution needed.
+
 ## Install
 
 1. Download [`dist/Pipes-arm64.zip`](dist/Pipes-arm64.zip). It's for Apple Silicon Macs, on macOS 12 or later.
@@ -72,6 +74,12 @@ Sources/UtahTeapotData.swift   teapot control points
 tools/snapshot_main.swift      offscreen renderer (thumbnails, screenshots)
 ```
 
+## License
+
+Public domain: [Unlicense](LICENSE). Pull requests and forks are welcome.
+
+There's one exception. `Sources/UtahTeapotData.swift` holds the Utah teapot control points from three.js, which are MIT licensed. They're free to use as well; just keep their notice ([THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)) with that file.
+
 ## Credits
 
-Inspired by the Windows NT 3D Pipes screensaver and [1j01/pipes](https://github.com/1j01/pipes). The code here is an independent implementation. The Utah teapot data comes from three.js (MIT); see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+Inspired by the Windows NT 3D Pipes screensaver and [1j01/pipes](https://github.com/1j01/pipes). The code here is an independent implementation. By [TinKurbatoff](https://github.com/TinKurbatoff).

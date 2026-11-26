@@ -1,5 +1,8 @@
 # Third-party notices
 
+This project is released into the public domain under the Unlicense (see `LICENSE`).
+The component below is the only exception: it stays under its own MIT license.
+
 ## Utah teapot data (`Sources/UtahTeapotData.swift`)
 
 The Bezier patch data for the Utah teapot (Martin Newell, 1975; Blinn-scaled) comes from
